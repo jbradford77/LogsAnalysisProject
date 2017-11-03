@@ -27,8 +27,7 @@ create view usable_log as select "right"(log.path, '-9') as "right", status, tim
  bears-love-berries   | 200 OK | 2016-07-01 07:01:12+00
  
 ```
-create view match_authors as select usable_log.right, articles.id from usable_log join ar
-ticles on usable_log.right = articles.slug;
+create view match_authors as select usable_log.right, articles.id from usable_log join articles on usable_log.right = articles.slug;
 ```
 ###sample data from match_authors
 
@@ -50,22 +49,21 @@ ticles on usable_log.right = articles.slug;
 ##for percent of errors over 1%
 
 ```
-create view total_status as select date_trunc('day', time) as days, count(*) from log gro
-up by days order by days;
+create view error_status as select date_trunc('day', time) as days, count(*) from log where status = '404 NOT FOUND' group by days order by days;
+
 ```
 
 ```
-create view total_status as select date_trunc('day', time) as days, count(*) from log gro
-up by days where status = '404 NOT FOUND' order by days;
+create view total_status as select date_trunc('day', time) as days, count(*) from log group by days order by days;
+
 ```
 
 ```
-create view total_and_error as select total_status.count, total_status.days, error_status
-.count as error_count from total_status join error_status on total_status.days = error_status.da
-ys;
+create view total_and_error as select total_status.count, total_status.days, error_status.count as error_count from total_status join error_status on total_status.days = error_status.days;
+
 ```
 
 ```
-create view mathed_up select days, error_count, count, round(error_count * 100 / count, 1
-) as percent from total_and_error;
+create view mathed_up as select days, error_count, count, round(error_count * 100 / count, 1) as percent from total_and_error;
+
 ```
