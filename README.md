@@ -1,4 +1,4 @@
-#Udacity Logs Analysis Project
+# Udacity Logs Analysis Project
 
 This uses Vagrant, VirtualBox, Python3, and PostgreSQL
 VirtualBox can be found here https://www.virtualbox.org/ get 5.1 or earlier
@@ -7,7 +7,7 @@ Vagrant is here https://www.vagrantup.com/
 
 
 
-##view to get top three articles:
+## view to get top three articles:
 
 ```
  create view top_three as  
@@ -20,7 +20,7 @@ Vagrant is here https://www.vagrantup.com/
 	limit 3;
 ```
 
-##views to get top authors:
+## views to get top authors:
 
 ``` 
 create view usable_log as 
@@ -45,7 +45,7 @@ create view count_authors as
 	inner join authors on articles.author = authors.id;
 ```
 
-##for percent of errors over 1%
+## for percent of errors over 1%
 
 ```
 create view error_status as 
