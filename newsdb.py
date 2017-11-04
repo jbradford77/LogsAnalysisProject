@@ -17,6 +17,12 @@ fail_day = c.fetchall()
 
 db.close()
 
-print top_articles
-print top_authors
-print fail_day
+print("\nWhat are the three top articles of all time?\n")
+for title, views in top_articles:
+    print("  {}  --  {} views".format(title, views))
+print("\nWho were the top authors?\n")
+for name, count in top_authors:
+    print("  {}  --  {} views".format(name, count))
+print("\nWhich days were the number of failure statuses higher than 2%?\n")
+for days, percent in fail_day:
+    print("  {}  --  {}%".format(days, percent))
