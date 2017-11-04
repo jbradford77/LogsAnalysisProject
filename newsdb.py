@@ -9,7 +9,7 @@ c.execute("select title, num from articles, top_three where articles.s"
 top_articles = c.fetchall()
 
 c.execute("select name, count(name) as num from count_authors group by name"
-          " order by count(name) desc limit 10;")
+          " order by count(name) desc;")
 top_authors = c.fetchall()
 
 c.execute("select days::date, percent from mathed_up where percent > 1;")
