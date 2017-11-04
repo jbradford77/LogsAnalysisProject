@@ -1,4 +1,11 @@
-#Udacity Logs Analysis Project - Views Added
+#Udacity Logs Analysis Project
+
+This uses Vagrant, VirtualBox, Python3, and PostgreSQL
+VirtualBox can be found here https://www.virtualbox.org/ get 5.1 or earlier
+Vagrant is here https://www.vagrantup.com/
+
+
+
 
 ##view to get top three articles:
 
