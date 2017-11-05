@@ -9,10 +9,10 @@ except:
 
 c = db.cursor()
 c.execute("""SELECT title, num
-			FROM articles, top_three
-			WHERE '/article/' || articles.slug = top_three.path
-			ORDER BY num DESC
-			LIMIT 3;""")
+            FROM articles, top_three
+            WHERE '/article/' || articles.slug = top_three.path
+            ORDER BY num DESC
+            LIMIT 3;""")
 top_articles = c.fetchall()
 
 c.execute("""SELECT *
