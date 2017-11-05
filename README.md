@@ -7,19 +7,11 @@
 3. Download the database here https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip
 * The included Vagrantfile will set up the database when you use vagrant up to start your virtual machine
 * Database has 3 tables: articles, authors, and log (log is a server log)
-4. psql into the news database
-```
-psql news
-```
-5. Import views listed below
+4. Import views listed below
 ```
 psql -d news -f create_views.sql
 ```
-6. exit the news database
-```
-\q
-```
-7. Run the program (if you have python 2 and 3 it might be python3 newsdb.python
+5. Run the program (if you have python 2 and 3 it might be python3 newsdb.python
 ```
 python newsdb.python
 ```

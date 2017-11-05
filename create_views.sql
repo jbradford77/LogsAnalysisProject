@@ -3,11 +3,13 @@ CREATE VIEW top_three AS
 	FROM log
 	GROUP BY log.path;
 
-CREATE VIEW count_authors AS 
-	SELECT usable_log.right, articles.author, authors.name 
-	FROM usable_log 
-	JOIN articles ON usable_log.right = articles.slug 
-	INNER JOIN authors ON articles.author = authors.id;
+CREATE VIEW count_authors as
+	SELECT authors.name, sum(num) as views
+	FROM top_three
+	JOIN articles on '/article/' || articles.slug = top_three.path
+	INNER JOIN authors on articles.author = authors.id
+	GROUP BY authors.id
+	ORDER BY views desc;
 
 CREATE VIEW error_status AS 
 	SELECT date_trunc('day', time) AS days, 
