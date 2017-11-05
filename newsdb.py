@@ -2,17 +2,26 @@
 
 import psycopg2
 
-db = psycopg2.connect(database="news")
+try:
+    db = psycopg2.connect(database="news")
+except:
+    print("Could not connect to database")
+
 c = db.cursor()
-c.execute("select title, num from articles, top_three where articles.s"
-          "lug = top_three.right order by num desc;")
+c.execute("""SELECT title, num
+			FROM articles, top_three
+			WHERE '/article/' || articles.slug = top_three.path
+			ORDER BY num DESC
+			LIMIT 3;""")
 top_articles = c.fetchall()
 
-c.execute("select name, count(name) as num from count_authors group by name"
-          " order by count(name) desc;")
+c.execute("""SELECT *
+            FROM count_authors;""")
 top_authors = c.fetchall()
 
-c.execute("select days::date, percent from mathed_up where percent > 1;")
+c.execute("""SELECT to_char(days::date, 'FMMonth DD, YYYY'), percent
+            FROM mathed_up
+            WHERE percent > 1;""")
 fail_day = c.fetchall()
 
 db.close()
