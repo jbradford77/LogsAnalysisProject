@@ -11,11 +11,10 @@
 ```
 psql -d news -f create_views.sql
 ```
-5. Run the program (if you have python 2 and 3 it might be python3 newsdb.python
+5. Run the program 
 ```
-python newsdb.python
+./newsdb.py
 ```
-
 
 
 ### Three questions are answered by this script
@@ -78,4 +77,17 @@ CREATE VIEW mathed_up AS
 	SELECT days, error_count, count, 
 	round(error_count * 100.0 / count, 1) AS percent 
 	FROM total_and_error;
+```
+
+```sql
+SELECT to_char(date, 'FMMonth DD, YYYY') AS date, 
+		ROUND(error_percent, 1) AS error_percent
+	FROM (
+		SELECT time::date AS date, 
+			100 * (COUNT(*) FILTER (WHERE status = '404 NOT FOUND') / 
+				COUNT(*)::numeric) AS error_percent
+		FROM log
+		GROUP BY time::date
+) a
+WHERE error_percent > 1;
 ```
