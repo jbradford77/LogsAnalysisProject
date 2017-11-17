@@ -1,4 +1,4 @@
-# Udacity Logs Analysis Project
+# Logs Analysis Project
 
 * This uses Vagrant, VirtualBox, Python3, and PostgreSQL
 * Uses psycopg2 to query a mock news database
